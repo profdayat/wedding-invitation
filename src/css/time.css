@@ -52,7 +52,7 @@
     font-size: 1.2rem;
 }
 
-.time a + p + i {
+.time > i {
     right: 8rem;
     top: 22rem;
 }
