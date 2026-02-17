@@ -2,19 +2,19 @@ export const data = {
     bride: {
         L: {
             id: 1,
-            name: 'Lorem Ipsum',
-            child: 'Putra ke lorem',
-            father: 'Lorem',
-            mother: 'Ipsum',
-            image: './src/assets/images/cowo.png'
+            name: 'Mukhammad Imam Nur Hidayat',
+            child: 'Putra ke 1',
+            father: 'Eri Subianto',
+            mother: 'Husnah',
+            image: './src/assets/images/suami.png'
         },
         P: {
             id: 2,
-            name: 'Ipsum Lorem',
-            child: 'Putri ke lorem',
-            father: 'Lorem',
-            mother: 'Ipsum',
-            image: './src/assets/images/cewe.png'
+            name: 'Lailatul Nur Hanifah',
+            child: 'Putri ke 1',
+            father: 'Sumarto',
+            mother: 'Nurul Qomariyah',
+            image: './src/assets/images/istri.png'
         },
 
         couple: './src/assets/images/couple.png'
@@ -22,53 +22,49 @@ export const data = {
 
     time: {
         marriage: {
-            year: '2030',
-            month: 'November',
-            date: '14',
-            day: 'Kamis',
+            year: '2026',
+            month: 'Juni',
+            date: '06',
+            day: 'Sabtu',
             hours: {
                 start: '08.00',
                 finish: 'Selesai'
             }
         },
         reception: {
-            year: '2024',
-            month: 'November',
-            date: '14',
-            day: 'Kamis',
+            year: '2026',
+            month: 'Juni',
+            date: '06',
+            day: 'Sabtu',
             hours: {
                 start: '11.00',
                 finish: 'Selesai'
             }
         },
-        address: 'Kp. Lorem, RT 000/ RW 000, Desa.Lorem, Kec.Ipsum, Kab.Lorem, Lorem (1234)'
+        address: 'Jl. Sungkono No 27, RT. 003 RW. 002,\nPogar, Bangil, Kab. Pasuruan, Jatim 67153'
     },
 
     link: {
-        calendar: 'https://calendar.app.google/oSVLRMYC79GzuA4f9',
-        map: 'https://maps.app.goo.gl/q1Ask2Jgd4ekiiKBA',
+        calendar: 'https://calendar.app.google/GLGL6XWD6dEGD5Fu6',
+        map: 'https://maps.app.goo.gl/SkkcC81ALYY9qhfo7',
     },
 
     galeri: [
         {
             id: 1,
-            image: './src/assets/images/1.png'
+            image: './src/assets/images/1.jpg'
         },
         {
             id: 2,
-            image: './src/assets/images/2.png'
+            image: './src/assets/images/2.jpg'
         },
         {
             id: 3,
-            image: './src/assets/images/3.png'
+            image: './src/assets/images/3.jpg'
         },
         {
             id: 4,
-            image: './src/assets/images/4.png'
-        },
-        {
-            id: 5,
-            image: './src/assets/images/5.png'
+            image: './src/assets/images/4.jpg'
         }
     ],
 
@@ -89,7 +85,7 @@ export const data = {
 
     audio: './src/assets/audio/wedding.mp3',
 
-    api: 'https://script.google.com/macros/s/AKfycbyydz6N4p2VWUG8zsXeURv6ap9RP8a4eC3x6N3x6qTDjMVr1cIBz9S0NsHw2rWvBOSXGg/exec',
+    api: 'https://script.google.com/macros/s/AKfycbz41OuRdPWe7xlBMAYJ_ATi2R1t1BXbucTNwiC7lCdZmb4h49DTD0fs5stBxOM4Xo4/exec',
 
     navbar: [
         {

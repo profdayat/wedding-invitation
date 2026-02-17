@@ -3,8 +3,8 @@ import { data } from "../assets/data/data.js";
 export const time = () => {
     const timeContainer = document.querySelector('.time');
     const [marriageDiv, receptionDiv] = timeContainer.querySelectorAll('div div');
-    const mapLink = timeContainer.querySelector('a');
-    const addressParagraph = timeContainer.querySelector('a + p');
+    const mapElement = timeContainer.querySelector('.google-map');
+    const addressParagraph = timeContainer.querySelector('.location-container p');
 
     const createTimeListItem = (title, details) => (
         `<h3>${title}</h3>
@@ -15,6 +15,6 @@ export const time = () => {
     marriageDiv.innerHTML = createTimeListItem('Akad', data.time.marriage);
     receptionDiv.innerHTML = createTimeListItem('Resepsi', data.time.reception);
 
-    mapLink.href = data.link.map;
+    mapElement.src = data.link.map;
     addressParagraph.textContent = data.time.address;
 };

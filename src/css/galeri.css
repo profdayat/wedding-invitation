@@ -40,7 +40,7 @@
 .galeri .container figure img {
     width: 100%;
     height: 35rem;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 15px;
     transition: var(--transition-small);
 }
@@ -139,7 +139,7 @@
 
 .galeri div:nth-of-type(2) > div img {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 20px;
 }
 
