@@ -3,7 +3,7 @@ import { data } from "../assets/data/data.js";
 export const time = () => {
     const timeContainer = document.querySelector('.time');
     const [marriageDiv, receptionDiv] = timeContainer.querySelectorAll('div div');
-    const mapElement = timeContainer.querySelector('.google-map');
+    const mapElement = timeContainer.querySelector('.peta-acara');
     const addressParagraph = timeContainer.querySelector('.location-container p');
 
     const createTimeListItem = (title, details) => (

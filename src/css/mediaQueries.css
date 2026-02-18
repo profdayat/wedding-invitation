@@ -7,11 +7,13 @@
         bottom: -5rem;
     }
 
-    .bride, .time{
+    .bride,
+    .time {
         padding: 6rem 1.4rem 8rem;
     }
 
-    .bride h2, .bride h3 {
+    .bride h2,
+    .bride h3 {
         font-size: 1.8rem;
     }
 
@@ -56,9 +58,13 @@
         bottom: -5rem;
     }
 
-    .time a + p + i {
+    .time a+p+i {
         right: 1.4rem;
         top: 16rem;
+    }
+
+    .peta-acara {
+        height: 300px;
     }
 
     .galeri {
@@ -97,7 +103,7 @@
         left: 0.8rem;
     }
 
-    .galeri .container button:nth-of-type(2){
+    .galeri .container button:nth-of-type(2) {
         right: 0.8rem;
     }
 
@@ -105,14 +111,14 @@
         padding: 0 1rem 4rem;
     }
 
-    .galeri div:nth-of-type(2) > div {
+    .galeri div:nth-of-type(2)>div {
         margin-top: -1rem;
         padding: 2rem 1rem;
         grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
         gap: 1rem;
     }
 
-    .galeri div:nth-of-type(2) > div img {
+    .galeri div:nth-of-type(2)>div img {
         border-radius: 15px;
     }
 
@@ -120,7 +126,7 @@
         font-size: 1.4rem;
     }
 
-    .galeri > i {
+    .galeri>i {
         top: 2rem;
         left: 3rem;
     }
@@ -130,15 +136,15 @@
         margin-top: -14rem;
     }
 
-    .wishas div:nth-of-type(1) > div{
+    .wishas div:nth-of-type(1)>div {
         flex-direction: column;
     }
 
-    .wishas div:nth-of-type(1) > div figure {
+    .wishas div:nth-of-type(1)>div figure {
         width: 100%;
     }
 
-    .wishas div:nth-of-type(1) > div figure img {
+    .wishas div:nth-of-type(1)>div figure img {
         width: 8rem;
     }
 
@@ -146,7 +152,7 @@
         padding: 2rem 1rem;
     }
 
-    .wishas div:nth-of-type(2) > form {
+    .wishas div:nth-of-type(2)>form {
         margin-top: -1rem;
     }
 
@@ -158,12 +164,12 @@
         gap: 0.6rem;
     }
 
-    .wishas div:nth-of-type(3) .button-grup  button {
+    .wishas div:nth-of-type(3) .button-grup button {
         padding: 0.3rem 0.6rem;
         font-size: 0.8rem;
     }
 
-    .wishas svg:nth-of-type(1){
+    .wishas svg:nth-of-type(1) {
         top: -4rem;
     }
 
@@ -185,7 +191,7 @@
         font-size: 1.4rem;
     }
 
-    footer > div a {
+    footer>div a {
         font-size: 0.6rem;
     }
 }
