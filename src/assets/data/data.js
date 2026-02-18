@@ -3,7 +3,7 @@ export const data = {
         L: {
             id: 1,
             name: 'Mukhammad Imam Nur Hidayat',
-            child: 'Putra ke 1',
+            child: 'Putra ke pertama',
             father: 'Eri Subianto',
             mother: 'Husnah',
             image: './src/assets/images/suami.png'
@@ -11,7 +11,7 @@ export const data = {
         P: {
             id: 2,
             name: 'Lailatul Nur Hanifah',
-            child: 'Putri ke 1',
+            child: 'Putri ke pertama',
             father: 'Sumarto',
             mother: 'Nurul Qomariyah',
             image: './src/assets/images/istri.png'
