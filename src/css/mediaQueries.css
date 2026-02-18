@@ -68,7 +68,7 @@
     }
 
     .galeri {
-        margin-top: -6rem;
+        margin-top: -2rem;
         padding: 4rem 1.4rem;
     }
 
@@ -81,7 +81,7 @@
     }
 
     .galeri .container figure img {
-        height: 14rem;
+        height: 20rem;
     }
 
     .galeri .container ul {
@@ -179,7 +179,7 @@
 
     .audio button {
         bottom: 5rem;
-        right: 0.8rem;
+        left: 1.4rem;
     }
 
     footer {

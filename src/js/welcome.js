@@ -1,5 +1,5 @@
-import {data} from "../assets/data/data.js";
-import {addClassElement, getQueryParameter, removeClassElement} from "../utils/helper.js";
+import { data } from "../assets/data/data.js";
+import { addClassElement, getQueryParameter, removeClassElement } from "../utils/helper.js";
 
 export const welcome = () => {
     const welcomeElement = document.querySelector('.welcome');
@@ -11,7 +11,7 @@ export const welcome = () => {
     const [iconButton] = audioButton.children;
 
     const generateFigureContent = (bride) => {
-        const {L: {name: brideLName}, P: {name: bridePName}, couple: coupleImage} = bride;
+        const { L: { name: brideLName }, P: { name: bridePName }, couple: coupleImage } = bride;
         return `
             <img src="${coupleImage}" alt="couple animation">
             <figcaption>
@@ -31,21 +31,20 @@ export const welcome = () => {
         }
     }
 
-    const initialAudio = () => {
-        let isPlaying = false;
+    let isPlaying = false; // Move isPlaying out to be accessible by both listeners
 
+    const initialAudio = () => {
         audioMusic.innerHTML = `<source src=${data.audio} type="audio/mp3"/>`;
 
         audioButton.addEventListener('click', () => {
-
-            if (isPlaying) {
+            if (!isPlaying) {
                 addClassElement(audioButton, 'active');
                 removeClassElement(iconButton, 'bx-play-circle');
-                addClassElement(iconButton, 'bx-pause-circle');
+                addClassElement(iconButton, 'bx-music');
                 audioMusic.play();
             } else {
                 removeClassElement(audioButton, 'active');
-                removeClassElement(iconButton, 'bx-pause-circle');
+                removeClassElement(iconButton, 'bx-music');
                 addClassElement(iconButton, 'bx-play-circle');
                 audioMusic.pause();
             }
@@ -62,8 +61,9 @@ export const welcome = () => {
             addClassElement(navbarElement, 'active');
             addClassElement(audioButton, 'show');
             removeClassElement(iconButton, 'bx-play-circle');
-            addClassElement(iconButton, 'bx-pause-circle');
+            addClassElement(iconButton, 'bx-music');
             audioMusic.play();
+            isPlaying = true; // Sync state
         }, 1500);
 
         setTimeout(() => {

@@ -3,7 +3,7 @@ export const data = {
         L: {
             id: 1,
             name: 'Mukhammad Imam Nur Hidayat',
-            child: 'Putra ke pertama',
+            child: 'Putra pertama',
             father: 'Eri Subianto',
             mother: 'Husnah',
             image: './src/assets/images/suami.png'
@@ -11,7 +11,7 @@ export const data = {
         P: {
             id: 2,
             name: 'Lailatul Nur Hanifah',
-            child: 'Putri ke pertama',
+            child: 'Putri pertama',
             father: 'Sumarto',
             mother: 'Nurul Qomariyah',
             image: './src/assets/images/istri.png'
@@ -41,7 +41,7 @@ export const data = {
                 finish: 'Selesai'
             }
         },
-        address: 'Jl. Sungkono No 27, RT. 003 RW. 002,\nPogar, Bangil, Kab. Pasuruan, Jatim 67153'
+        address: `(Kediaman mempelai putri)\nJl. Sungkono No 27, RT. 003 RW. 002,\nPogar, Bangil, Kab. Pasuruan, Jatim 67153`
     },
 
     link: {

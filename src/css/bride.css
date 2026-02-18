@@ -2,7 +2,7 @@
     width: 100%;
     min-height: 100vh;
     text-align: center;
-    padding: 10rem 8rem;
+    padding: 10rem 8rem 8rem;
     position: relative;
 }
 
@@ -59,7 +59,10 @@
     margin-top: 1rem;
 }
 
-.bride i, .hadist i, .time > i, .galeri > i {
+.bride i,
+.hadist i,
+.time>i,
+.galeri>i {
     font-size: 3rem;
     color: #908d8d;
     position: absolute;
@@ -72,7 +75,7 @@
     right: 8rem;
 }
 
-.bride i:nth-of-type(2){
+.bride i:nth-of-type(2) {
     left: 8rem;
     top: 24rem;
 }
@@ -82,23 +85,25 @@
     right: 8rem;
 }
 
-.bride i:nth-of-type(4){
+.bride i:nth-of-type(4) {
     top: 60rem;
     left: 8rem;
 }
 
-.bride i:nth-of-type(5){
+.bride i:nth-of-type(5) {
     right: 8rem;
     bottom: 6rem;
 }
 
 .hadist {
     width: 100%;
-    padding: 4rem 8rem;
+    padding: 8rem 8rem;
     text-align: center;
-    background-color: var(--bg-color);
+    background-color: #fff;
     position: relative;
 }
+
+
 
 .hadist h2 {
     font-size: var(--fontSize-heading-base);
@@ -125,10 +130,10 @@
     z-index: -10;
 }
 
-.hadist svg:nth-of-type(1){
+.hadist svg:nth-of-type(1) {
     top: -8rem;
 }
 
-.hadist svg:nth-of-type(2){
+.hadist svg:nth-of-type(2) {
     bottom: -15rem;
 }
