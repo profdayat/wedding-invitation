@@ -50,9 +50,10 @@
 
 .time a {
     padding: 0.5rem 1rem;
-    color: #fff;
+    color: #000;
     font-size: 1rem;
-    background-color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
     margin: 2rem auto 1rem;
     border-radius: 20px;
     width: fit-content;
@@ -60,6 +61,13 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    transition: var(--transition-small);
+}
+
+.time a:hover {
+    color: #fff;
+    background-color: #000;
+    cursor: pointer;
 }
 
 .time a i {
