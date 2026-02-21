@@ -221,9 +221,8 @@ export const galeri = () => {
     // This allows swipes to work seamlessly across the entire width
     figureElement.addEventListener('mousedown', handlePressStart);
     figureElement.addEventListener('touchstart', (e) => {
-        if (e.cancelable) e.preventDefault();
         handlePressStart(e);
-    }, { passive: false });
+    }, { passive: true });
 
     figureElement.addEventListener('touchmove', (e) => {
         touchEndX = e.changedTouches[0].screenX;

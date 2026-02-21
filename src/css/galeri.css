@@ -28,7 +28,7 @@
     margin: 0 auto;
     overflow: hidden;
     position: relative;
-    touch-action: none;
+    touch-action: pan-y;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -116,7 +116,7 @@
     cursor: default;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
-    touch-action: none;
+    touch-action: pan-y;
     pointer-events: none;
 }
 
