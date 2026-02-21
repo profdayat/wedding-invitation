@@ -46,6 +46,10 @@ export const galeri = () => {
 
         updateNavigationButtons(data.galeri[0].id);
         updatePaginationClasses();
+
+        // Update CSS variable for progress bar duration
+        const duration = data.config?.gallery_duration || 4000;
+        document.documentElement.style.setProperty('--gallery-duration', `${duration}ms`);
     };
 
     let lastNormalizedIndex = -1;
@@ -127,22 +131,33 @@ export const galeri = () => {
         moveGallery('next');
     };
 
-    let intervalId;
-
-    const startAutoPlay = () => {
-        clearInterval(intervalId);
-        intervalId = setInterval(autoPlayGallery, 4000);
+    const pauseGallery = () => {
+        clearTimeout(timerId);
+        remainingTime -= (Date.now() - startTime);
+        paginationElement.classList.add('paused');
     };
 
-    nextButton.addEventListener('click', () => {
-        moveGallery('next');
-        startAutoPlay();
-    });
+    const resumeGallery = (e) => {
+        if (paginationElement.classList.contains('paused')) {
+            startTimer(Math.max(remainingTime, 100));
+            paginationElement.classList.remove('paused');
+        }
+    };
 
-    prevButton.addEventListener('click', () => {
-        moveGallery('prev');
-        startAutoPlay();
-    });
+    let timerId;
+    let startTime;
+    let remainingTime = data.config?.gallery_duration || 4000;
+
+    const startTimer = (time) => {
+        clearTimeout(timerId);
+        startTime = Date.now();
+        remainingTime = time;
+        timerId = setTimeout(() => {
+            moveGallery('next');
+            startTimer(data.config?.gallery_duration || 4000);
+        }, time);
+    };
+
 
     showAllButton.addEventListener('click', () => {
         showAllBox.innerHTML = data.galeri.map(item => `<img src="${item.image}" alt="image galeri">`).join('');
@@ -155,13 +170,80 @@ export const galeri = () => {
     });
 
     initializeGallery();
-    startAutoPlay();
+    startTimer(data.config?.gallery_duration || 4000);
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50;
+
+    let isLongPress = false;
+    let pressTimer;
+
+    const handlePressStart = (e) => {
+        isLongPress = false;
+        touchStartX = e.type.includes('touch') ? e.touches[0].screenX : e.screenX;
+
+        pressTimer = setTimeout(() => {
+            isLongPress = true;
+            pauseGallery();
+        }, 200);
+    };
+
+    const handlePressEnd = (e) => {
+        clearTimeout(pressTimer);
+        touchEndX = e.type.includes('touch') ? e.changedTouches[0].screenX : e.screenX;
+
+        if (isLongPress) {
+            resumeGallery(e);
+        } else {
+            const swipeDistance = touchEndX - touchStartX;
+            if (Math.abs(swipeDistance) > swipeThreshold) {
+                if (swipeDistance > 0) moveGallery('prev');
+                else moveGallery('next');
+                startTimer(data.config?.gallery_duration || 4000);
+            } else {
+                const rect = figureElement.getBoundingClientRect();
+                const clientX = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+                const clickX = clientX - rect.left;
+
+                if (clickX < rect.width * 0.4) {
+                    moveGallery('prev');
+                } else if (clickX > rect.width * 0.6) {
+                    moveGallery('next');
+                }
+                startTimer(data.config?.gallery_duration || 4000);
+            }
+            paginationElement.classList.remove('paused');
+        }
+    };
+
+    // Unified interaction on a single parent element (figureElement)
+    // This allows swipes to work seamlessly across the entire width
+    figureElement.addEventListener('mousedown', handlePressStart);
+    figureElement.addEventListener('touchstart', (e) => {
+        if (e.cancelable) e.preventDefault();
+        handlePressStart(e);
+    }, { passive: false });
+
+    figureElement.addEventListener('touchmove', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    figureElement.addEventListener('mouseup', handlePressEnd);
+    figureElement.addEventListener('touchend', handlePressEnd);
+
+    figureElement.addEventListener('mouseleave', (e) => {
+        clearTimeout(pressTimer);
+        if (isLongPress) resumeGallery(e);
+    });
+
+    figureElement.addEventListener('contextmenu', (e) => e.preventDefault());
 
     paginationElement.querySelectorAll('li').forEach((pagination) => {
         pagination.addEventListener('click', (e) => {
             const id = +e.target.closest('li').dataset.id;
             updateGalleryImage(id);
-            startAutoPlay();
+            startTimer(data.config?.gallery_duration || 4000);
         })
     })
 };

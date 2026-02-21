@@ -135,4 +135,7 @@ export const data = {
             path: '#wishas',
         },
     ],
+    config: {
+        gallery_duration: 4000 // Ubah angka ini (dalam milidetik)
+    }
 }
