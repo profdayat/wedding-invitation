@@ -28,7 +28,7 @@ export const data = {
             day: 'Sabtu',
             hours: {
                 start: '08.00',
-                finish: 'Selesai'
+                finish: '10.00'
             }
         },
         reception: {
@@ -71,16 +71,32 @@ export const data = {
     bank: [
         {
             id: 1,
-            name: 'Lorem Ipsum',
-            icon: './src/assets/images/bca.png',
-            rekening: '12345678'
+            name: 'Wedding Dayat & Hanif',
+            icon: './src/assets/images/qris.png',
+            rekening: 'Scan me',
+            type: 'qris'
         },
         {
             id: 2,
-            name: 'Ipsum Lorem',
-            icon: './src/assets/images/bri.png',
-            rekening: '12345678'
+            name: 'Mukhammad Imam Nur Hidayat',
+            icon: './src/assets/images/bca.png',
+            rekening: '2251102726',
+            type: 'bank'
         },
+        {
+            id: 3,
+            name: 'Mukhammad Imam Nur Hidayat',
+            icon: './src/assets/images/permata.png',
+            rekening: '1240088602',
+            type: 'bank'
+        },
+        {
+            id: 4,
+            name: 'Mukhammad Imam Nur Hidayat',
+            icon: './src/assets/images/bank-jatim.png',
+            rekening: '0493074881',
+            type: 'bank'
+        }
     ],
 
     audio: './src/assets/audio/wedding.mp3',

@@ -10,7 +10,7 @@
 .galeri .container {
     width: 100%;
     padding: 0 1.5rem 2rem;
-    border-radius: 50px;
+    border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 -1px 1px rgba(0, 0, 0, 0.1);
     position: relative;
 }
@@ -26,24 +26,21 @@
 .galeri .container figure {
     width: 100%;
     margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.galeri .container figure::-webkit-scrollbar,
-.galeri div:nth-of-type(2)::-webkit-scrollbar {
-    display: none;
-}
-
-.galeri .container figure img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
+}
+
+.gallery-wrapper img {
+    min-width: 100%;
     height: 35rem;
     object-fit: contain;
     border-radius: 15px;
-    transition: var(--transition-small);
 }
 
 .galeri .container ul {
@@ -59,41 +56,64 @@
 }
 
 .galeri .container ul li {
-    width: 1.8rem;
-    height: 0.25rem;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 1px;
+    width: 2.5rem;
+    height: 0.2rem;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
     list-style-type: none;
     cursor: pointer;
+    overflow: hidden;
 }
 
-.galeri .container ul li:hover,
-.galeri .container ul li.active {
+.galeri .container ul li .progress-bar {
+    width: 0%;
+    height: 100%;
     background-color: #fff;
+    transition: none;
+}
+
+.galeri .container ul li.active .progress-bar {
+    width: 100%;
+    transition: width 4s linear;
+}
+
+.galeri .container ul li.passed .progress-bar {
+    width: 100%;
+    transition: none;
 }
 
 .galeri .container button:nth-of-type(1),
 .galeri .container button:nth-of-type(2) {
-    font-size: 4rem;
-    color: rgba(255, 255, 255, 0.5);
-    background: none;
+    font-size: 2.5rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
     border: none;
     position: absolute;
-    top: 24.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-small);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
-.galeri .container button:nth-of-type(1) i:hover,
-.galeri .container button:nth-of-type(2) i:hover {
-    color: #fff;
+.galeri .container button:nth-of-type(1):hover,
+.galeri .container button:nth-of-type(2):hover {
+    background-color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
 }
 
 .galeri .container button:nth-of-type(1) {
-    left: 2rem;
+    left: 1rem;
 }
 
 .galeri .container button:nth-of-type(2) {
-    right: 2rem;
+    right: 1rem;
 }
 
 .galeri .container button:nth-of-type(3) {

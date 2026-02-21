@@ -1,4 +1,4 @@
-import {data} from "../assets/data/data.js";
+import { data } from "../assets/data/data.js";
 
 export const galeri = () => {
     const galeriElement = document.querySelector('.galeri');
@@ -7,26 +7,85 @@ export const galeri = () => {
     const [_, figureElement, paginationElement, prevButton, nextButton, showAllButton] = galeriElement.children[0].children;
     const [__, showAllBox, closeButton] = showAllContainer.children;
 
+    let currentIndex = 1;
+    let isTransitioning = false;
+
     const initializeGallery = () => {
-        const initialImage = data.galeri[0];
-        figureElement.innerHTML = `<img src="${initialImage.image}" alt="galeri image" id="${initialImage.id}">`;
+        const firstImg = data.galeri[0];
+        const lastImg = data.galeri[data.galeri.length - 1];
+
+        figureElement.innerHTML = `
+            <div class="gallery-wrapper" style="transform: translateX(-100%);">
+                <img src="${lastImg.image}" alt="galeri image" class="clone">
+                ${data.galeri.map((item) => `<img src="${item.image}" alt="galeri image" id="galeri-${item.id}">`).join('')}
+                <img src="${firstImg.image}" alt="galeri image" class="clone">
+            </div>
+        `;
 
         data.galeri.forEach((item, index) => {
-            paginationElement.innerHTML += `<li data-id="${item.id}" ${index === 0 ? 'class="active"' : ''}></li>`;
+            paginationElement.innerHTML += `
+                <li data-id="${item.id}">
+                    <div class="progress-bar"></div>
+                </li>`;
         });
 
-        updateNavigationButtons(initialImage.id);
+        const wrapper = figureElement.querySelector('.gallery-wrapper');
+        wrapper.addEventListener('transitionend', () => {
+            isTransitioning = false;
+            if (currentIndex === 0) {
+                wrapper.style.transition = 'none';
+                currentIndex = data.galeri.length;
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            } else if (currentIndex === data.galeri.length + 1) {
+                wrapper.style.transition = 'none';
+                currentIndex = 1;
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            updatePaginationClasses();
+        });
+
+        updateNavigationButtons(data.galeri[0].id);
+        updatePaginationClasses();
+    };
+
+    let lastNormalizedIndex = -1;
+
+    const updatePaginationClasses = (forceReset = false) => {
+        const lis = paginationElement.querySelectorAll('li');
+        let normalizedIndex = currentIndex;
+        if (currentIndex > data.galeri.length) normalizedIndex = 1;
+        if (currentIndex < 1) normalizedIndex = data.galeri.length;
+
+        if (!forceReset && normalizedIndex === lastNormalizedIndex) return;
+        lastNormalizedIndex = normalizedIndex;
+
+        lis.forEach((li, idx) => {
+            const currentItemIndex = idx + 1;
+            li.classList.remove('active', 'passed');
+
+            if (currentItemIndex < normalizedIndex) {
+                li.classList.add('passed');
+            } else if (currentItemIndex === normalizedIndex) {
+                void li.offsetWidth;
+                li.classList.add('active');
+            }
+        });
     };
 
     const updateGalleryImage = (id) => {
-        const selectedImage = data.galeri.find(item => item.id === id);
+        if (isTransitioning) return;
+        const index = data.galeri.findIndex(item => item.id === id);
 
-        if (selectedImage) {
-            figureElement.innerHTML = `<img src="${selectedImage.image}" alt="galeri image" id="${selectedImage.id}">`;
+        if (index !== -1) {
+            currentIndex = index + 1;
+            const wrapper = figureElement.querySelector('.gallery-wrapper');
+            wrapper.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            isTransitioning = true;
 
-            paginationElement.querySelectorAll('li').forEach((li) => {
-                li.classList.toggle('active', parseInt(li.dataset.id) === id);
-            });
+            const activeId = data.galeri[index].id;
+            updateNavigationButtons(activeId);
+            updatePaginationClasses(true);
         }
     };
 
@@ -35,29 +94,54 @@ export const galeri = () => {
         prevButton.dataset.id = `${id}`;
     };
 
+    const moveGallery = (direction) => {
+        if (isTransitioning) return;
+
+        const wrapper = figureElement.querySelector('.gallery-wrapper');
+        wrapper.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        isTransitioning = true;
+
+        if (direction === 'next') {
+            currentIndex++;
+        } else {
+            currentIndex--;
+        }
+
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Update pagination and dataset ID
+        let activeId;
+        if (currentIndex > data.galeri.length) {
+            activeId = data.galeri[0].id;
+        } else if (currentIndex < 1) {
+            activeId = data.galeri[data.galeri.length - 1].id;
+        } else {
+            activeId = data.galeri[currentIndex - 1].id;
+        }
+
+        updateNavigationButtons(activeId);
+        updatePaginationClasses();
+    };
+
     const autoPlayGallery = () => {
-        let id = parseInt(nextButton.dataset.id);
-        id = (id < data.galeri.length) ? id + 1 : 1;
-        updateNavigationButtons(id);
-        updateGalleryImage(id);
+        moveGallery('next');
+    };
+
+    let intervalId;
+
+    const startAutoPlay = () => {
+        clearInterval(intervalId);
+        intervalId = setInterval(autoPlayGallery, 4000);
     };
 
     nextButton.addEventListener('click', () => {
-        let id = parseInt(nextButton.dataset.id);
-        if (id < data.galeri.length) {
-            id++;
-            updateNavigationButtons(id);
-            updateGalleryImage(id);
-        }
+        moveGallery('next');
+        startAutoPlay();
     });
 
     prevButton.addEventListener('click', () => {
-        let id = parseInt(prevButton.dataset.id);
-        if (id > 1) {
-            id--;
-            updateNavigationButtons(id);
-            updateGalleryImage(id);
-        }
+        moveGallery('prev');
+        startAutoPlay();
     });
 
     showAllButton.addEventListener('click', () => {
@@ -71,12 +155,13 @@ export const galeri = () => {
     });
 
     initializeGallery();
-    setInterval(autoPlayGallery, 3000);
+    startAutoPlay();
 
     paginationElement.querySelectorAll('li').forEach((pagination) => {
         pagination.addEventListener('click', (e) => {
-            const id = +e.target.dataset.id;
+            const id = +e.target.closest('li').dataset.id;
             updateGalleryImage(id);
+            startAutoPlay();
         })
     })
 };

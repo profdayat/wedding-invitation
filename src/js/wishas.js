@@ -4,10 +4,11 @@ import {
     generateRandomColor,
     generateRandomId,
     getCurrentDateTime,
-    renderElement
+    renderElement,
+    getQueryParameter
 } from "../utils/helper.js";
-import {data} from "../assets/data/data.js";
-import {comentarService} from "../services/comentarService.js";
+import { data } from "../assets/data/data.js";
+import { comentarService } from "../services/comentarService.js";
 
 export const wishas = () => {
     const wishasContainer = document.querySelector('.wishas');
@@ -17,19 +18,48 @@ export const wishas = () => {
     const pageNumber = wishasContainer.querySelector('.page-number');
     const [prevButton, nextButton] = wishasContainer.querySelectorAll('.button-grup button');
 
-    const listItemBank = (data) => (
-        `  <figure data-aos="zoom-in" data-aos-duration="1000">
-                <img src=${data.icon} alt="bank icon animation">
-                <figcaption>No. Rekening ${data.rekening.slice(0, 4)}xxxx <br>A.n ${data.name}</figcaption>
-                <button data-rekening=${data.rekening} aria-label="copy rekening">Salin No. Rekening</button>
-           </figure>`
-    );
+    const listItemBank = (data) => {
+        if (data.type === 'qris') {
+            return `
+                <figure data-aos="zoom-in" data-aos-duration="1000" class="qris-card">
+                    <img src="${data.icon}" alt="QRIS" style="width: 100%; max-width: 250px; height: auto;">
+                    <figcaption>QRIS <br>A.n ${data.name}</figcaption>
+                </figure>`;
+        }
+        return `
+            <figure data-aos="zoom-in" data-aos-duration="1000">
+                <img src="${data.icon}" alt="bank icon animation">
+                <figcaption>No. Rekening ${data.rekening} <br>A.n ${data.name}</figcaption>
+                <button data-rekening="${data.rekening}" aria-label="copy rekening">Salin No. Rekening</button>
+            </figure>`;
+    };
 
     const initialBank = () => {
+        const giftParam = getQueryParameter('g');
+        const loveGiftContainer = document.querySelector('#love-gift');
+
+        if (!giftParam || giftParam === '0') {
+            loveGiftContainer.style.display = 'none';
+            return;
+        }
+
+        loveGiftContainer.style.display = 'block';
+
         const wishasBank = wishasContainer.children[1];
         const [_, __, containerBank] = wishasBank.children;
 
-        renderElement(data.bank, containerBank, listItemBank);
+        let filteredBank = data.bank;
+        if (giftParam === 'all') {
+            filteredBank = data.bank;
+        } else if (giftParam.includes(',')) {
+            const ids = giftParam.split(',').map(id => parseInt(id.trim()));
+            filteredBank = data.bank.filter(b => ids.includes(b.id));
+        } else if (!isNaN(giftParam)) {
+            const id = parseInt(giftParam);
+            filteredBank = data.bank.filter(b => b.id === id);
+        }
+
+        renderElement(filteredBank, containerBank, listItemBank);
 
         containerBank.querySelectorAll('button').forEach((button) => {
             button.addEventListener('click', async (e) => {
@@ -82,7 +112,7 @@ export const wishas = () => {
 
         try {
             const response = await comentarService.getComentar();
-            const {comentar} = response;
+            const { comentar } = response;
 
             lengthComentar = comentar.length;
             comentar.reverse();
@@ -144,7 +174,7 @@ export const wishas = () => {
 
         try {
             const response = await comentarService.getComentar();
-            const {comentar} = response;
+            const { comentar } = response;
 
             comentar.reverse();
 
