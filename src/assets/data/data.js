@@ -4,7 +4,7 @@ export const data = {
             id: 1,
             name: 'Mukhammad Imam Nur Hidayat',
             child: 'Putra pertama',
-            father: 'Eri Subianto',
+            father: 'Hariyanto',
             mother: 'Husnah',
             image: './src/assets/images/suami.png'
         },
@@ -27,8 +27,8 @@ export const data = {
             date: '06',
             day: 'Sabtu',
             hours: {
-                start: '08.00',
-                finish: '10.00'
+                start: '07.00',
+                finish: 'Selesai'
             }
         },
         reception: {
@@ -37,8 +37,8 @@ export const data = {
             date: '06',
             day: 'Sabtu',
             hours: {
-                start: '11.00',
-                finish: 'Selesai'
+                start: '10.00',
+                finish: '13.00'
             }
         },
         address: `(Kediaman mempelai putri)\nJl. Sungkono No 27, RT. 003 RW. 002,\nPogar, Bangil, Kab. Pasuruan, Jatim 67153`
