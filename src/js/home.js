@@ -44,15 +44,8 @@ export const home = () => {
         } = time.marriage;
 
         return `
-            <time datetime="
-                ${year}-
-                ${String(monthNameToNumber(month)).padStart(2, '0')}-
-                ${String(date).padStart(2, '0')}
-            ">
-                ${day},
-                ${date}
-                ${month}
-                ${year}
+            <time datetime="${year}-${String(monthNameToNumber(month)).padStart(2, '0')}-${String(date).padStart(2, '0')}">
+                ${day}, ${date} ${month} ${year}
             </time>
         `;
     };
@@ -66,35 +59,19 @@ export const home = () => {
 
         return `
             <div>
-                <p>
-                    ${days}
-                    <br>
-                    <span>Hari</span>
-                </p>
+                <p>${days}<br><span>Hari</span></p>
             </div>
 
             <div>
-                <p>
-                    ${hours}
-                    <br>
-                    <span>Jam</span>
-                </p>
+                <p>${hours}<br><span>Jam</span></p>
             </div>
 
             <div>
-                <p>
-                    ${minutes}
-                    <br>
-                    <span>Menit</span>
-                </p>
+                <p>${minutes}<br><span>Menit</span></p>
             </div>
 
             <div>
-                <p>
-                    ${seconds}
-                    <br>
-                    <span>Detik</span>
-                </p>
+                <p>${seconds}<br><span>Detik</span></p>
             </div>
         `;
     };
@@ -114,11 +91,9 @@ export const home = () => {
             clearInterval(intervalId);
 
             homeTime.innerHTML = `
-                ${generateCountdownMarkup(0, 0, 0, 0)}
-
-                <p class="countdown-text">
+                <div class="countdown-finished">
                     💍 Acara Sedang Berlangsung
-                </p>
+                </div>
             `;
 
             return;
