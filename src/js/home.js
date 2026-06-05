@@ -47,7 +47,7 @@ export const home = () => {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         if (distance < 0) {
-            clearInterval(intervalId);
+            // clearInterval(intervalId);
             homeTime.innerHTML = generateCountdownMarkup(0, 0, 0, 0);
         } else {
             homeTime.innerHTML = generateCountdownMarkup(days, hours, minutes, seconds);
