@@ -91,9 +91,9 @@ export const home = () => {
             clearInterval(intervalId);
 
             homeTime.innerHTML = `
-                <div class="countdown-finished">
+                <p class="countdown-finished">
                     💍 Acara Sedang Berlangsung
-                </div>
+                </p>
             `;
 
             return;
