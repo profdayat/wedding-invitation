@@ -82,30 +82,33 @@ export const home = () => {
 
         const distance = endTime - now;
 
+        const oneDay = 24 * 60 * 60 * 1000;
+
+
         // =========================
         // EVENT SUDAH DIMULAI
         // =========================
 
-        if (distance < 0) {
-
-            clearInterval(intervalId);
-
-            homeTime.innerHTML = `
-                <p class="countdown-finished">
-                    💍 Acara Sedang Berlangsung
-                </p>
-            `;
-
-            return;
-        }
-
-        else if (distance < -1) {   
+        if (distance < -oneDay) {
 
             clearInterval(intervalId);
 
             homeTime.innerHTML = `
                 <p class="countdown-finished">
                     💍 Acara Sudah Berlalu
+                </p>
+            `;
+
+            return;
+        }
+
+        else if (distance < 0) {
+
+            clearInterval(intervalId);
+
+            homeTime.innerHTML = `
+                <p class="countdown-finished">
+                    💍 Acara Sedang Berlangsung
                 </p>
             `;
 
