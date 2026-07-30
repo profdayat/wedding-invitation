@@ -99,6 +99,19 @@ export const home = () => {
             return;
         }
 
+        else if (distance < -1) {   
+
+            clearInterval(intervalId);
+
+            homeTime.innerHTML = `
+                <p class="countdown-finished">
+                    💍 Acara Sudah Berlalu
+                </p>
+            `;
+
+            return;
+        }
+
         const days = Math.floor(
             distance / (1000 * 60 * 60 * 24)
         );
